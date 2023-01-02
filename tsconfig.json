@@ -1,0 +1,59 @@
+{
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
+    "outDir": "dist",
+    "target": "esnext",
+    "module": "esnext",
+    "noEmit": false,
+    "declaration": true,
+    "declarationMap": true,
+    "importsNotUsedAsValues": "remove",
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "skipLibCheck": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "strict": true,
+    "incremental": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@model/*": [
+        "./src/model/*"
+      ],
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "lib": [
+      "dom",
+      "esnext",
+    ]
+  },
+  "include": [
+    "./*.ts",
+    "./global.d.ts",
+    "index.ts",
+    "./src/**/*.ts",
+    "./src/**/*.d.ts",
+    "./src/**/*.tsx",
+  ],
+  "exclude": [
+    "dist/",
+    "build",
+    "node_modules",
+    "lib",
+    "types"
+  ]
+}
