@@ -86,11 +86,8 @@ const rheaSystem = new THREE.Object3D()
 rheaSystem.add(rhea)
 saturn.add(rheaSystem)
 
-
-
-const renderer = new WebGLRenderer({ antialias: true });
-
-renderer.setSize(window.innerWidth, window.innerHeight);
+const renderer = new WebGLRenderer({ antialias: true});
+renderer.setSize(window.innerWidth, 400);
 
 renderer.setAnimationLoop(update);
 
@@ -158,16 +155,17 @@ function update(dt: number) {
     tethysSystem.rotation.y += 0.02
     dioneSystem.rotation.y += 0.01
     rheaSystem.rotation.y += 0.03
-    ringSystem.rotation.y += 0.01
-    scene.rotation.y += 0.01
+    ringSystem.rotation.y += 0.005
+    scene.rotation.y += 0.0005
     effect.render(scene, camera);
 }
 
+
 function onResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.aspect = window.innerWidth / 400;
     camera.updateProjectionMatrix();
 
-    composer.setSize(window.innerWidth, window.innerHeight);
+    composer.setSize(window.innerWidth, 400);
 }
 
 
