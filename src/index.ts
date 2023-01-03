@@ -90,7 +90,7 @@ saturn.add(rheaSystem)
 
 const renderer = new WebGLRenderer({ antialias: true });
 
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize(window.innerWidth, window.innerHeight/2);
 
 renderer.setAnimationLoop(update);
 
