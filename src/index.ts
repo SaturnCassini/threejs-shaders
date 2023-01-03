@@ -16,10 +16,10 @@ const path = './objects/SSTITLE.gltf';
 
 
 
-const camera = new PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 50);
-camera.position.z = 5;
+const camera = new PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.01, 50);
+camera.position.z = 4;
 camera.position.y = 3;
-// camera.position.x = 4;
+camera.position.x = 2;
 
 const scene = new Scene();
 
@@ -46,7 +46,6 @@ const ringSystem2 = new THREE.Object3D()
 ringSystem2.add(ring2)
 
 saturn.add(ringSystem2)
-camera.lookAt(saturn.position)
 
 // Add orbiting moons
 // Titan
@@ -98,20 +97,24 @@ const rheaSystem = new THREE.Object3D()
 rheaSystem.add(rhea)
 saturn.add(rheaSystem)
 
+// Renderer options
+camera.lookAt(saturn.position)
+
+
 const renderer = new WebGLRenderer({ antialias: true});
-renderer.setSize(800, 400);
+renderer.setSize(window.innerHeight, window.innerHeight);
 
 renderer.setAnimationLoop(update);
 
 //document.body.appendChild(renderer.domElement);
 
-// window.addEventListener('resize', onResize, false);
+window.addEventListener('resize', onResize, false);
 
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
 
 const effect = new AsciiEffect(renderer, ' .-+*%@', { invert: true });
-effect.setSize(window.innerWidth/2, window.innerHeight/2);
+effect.setSize(window.innerWidth, window.innerHeight);
 effect.domElement.style.color = 'lightgreen';
 effect.domElement.style.backgroundColor = 'black';
 document.body.appendChild(effect.domElement);
@@ -123,39 +126,6 @@ controls.enableDamping = true
 controls.dampingFactor = 0.05
 controls.maxDistance = 15
 controls.minDistance = 3
-
-// // Add a title  to the scene
-// // create canvas element and draw text on it
-// const canvas = document.createElement('canvas');
-// const ctx = canvas.getContext('2d');
-// ctx.font = 'bold 36px Arial';
-// ctx.fillStyle = 'white';
-// ctx.fillText('SATURN SERIES', 0, 36);
-
-// // create texture from canvas element
-// const texture = new THREE.CanvasTexture(canvas);
-
-// // create plane and apply texture to it
-// const geometry = new THREE.PlaneGeometry(canvas.width, canvas.height);
-// const material = new THREE.MeshNormalMaterial({ map: texture });
-// const plane = new THREE.Mesh(geometry, material);
-
-// // add plane to scene
-// scene.add(plane);
-
-// // First, create a text geometry with the desired message and font
-// const textGeometry = new TextGeometry("SATURN SERIES", {
-//     font: font, // font is an instance of THREE.Font
-//     size: 10,
-//     height: 2
-//   });
-  
-//   // Then, create a material for the text
-//   const textMaterial = new THREE.MeshNormalMaterial({ });
-  
-//   // Finally, create the text mesh and add it to the scene
-//   const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-//   scene.add(textMesh);
 
 function update(dt: number) {
 
@@ -173,12 +143,11 @@ function update(dt: number) {
     effect.render(scene, camera);
 }
 
-
 function onResize() {
-    camera.aspect = 800/400 ;
+    camera.aspect = window.innerWidth/(window.innerHeight/2 ) ;
     camera.updateProjectionMatrix();
 
-    composer.setSize(800, 400);
+    composer.setSize(window.innerWidth, window.innerHeight/2);
 }
 
 
