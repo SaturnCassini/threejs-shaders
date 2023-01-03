@@ -4,6 +4,9 @@
       "module": "CommonJS"
     }
   },
+  "typeAcquisition": {
+    "enable": true
+  },
   "compilerOptions": {
     "rootDir": ".",
     "baseUrl": ".",
