@@ -9,14 +9,12 @@ export class PlasmaOrbMaterial extends ShaderMaterial {
 
 
     public get time() { return this.uniforms.time.value; }
-    public set time(v) { this.uniforms.time.value = v; }
+    public set time(v: number) {
+        this.uniforms.time.value = v;
+    }
 
-    public get radius(): number {
-        return this.uniforms.radius.value;
-    }
-    public set radius(r: number) {
-        this.uniforms.radius.value = r;
-    }
+    public get radius(): number { return this.uniforms.radius.value; }
+    public set radius(r: number) { this.uniforms.radius.value = r; }
 
     public get color1(): ColorRepresentation { return (this.uniforms.color1 as IUniform<Color>).value; }
     public set color1(v: ColorRepresentation) { (this.uniforms.color1.value as Color).set(v); }
@@ -24,8 +22,7 @@ export class PlasmaOrbMaterial extends ShaderMaterial {
     public get color2(): ColorRepresentation { return (this.uniforms.color2 as IUniform<Color>).value; }
     public set color2(v: ColorRepresentation) { (this.uniforms.color2.value as Color).set(v); }
 
-    constructor(params: {
-        at: Point3,
+    constructor(params?: {
         radius?: number,
         color1?: ColorRepresentation,
         color2?: ColorRepresentation,
@@ -37,14 +34,13 @@ export class PlasmaOrbMaterial extends ShaderMaterial {
 
             uniforms: {
 
-                radius: asUniform(params.radius ?? 100),
-                worldPos: asUniform(params.at),
+                radius: asUniform(params?.radius ?? 10),
                 time: asUniform(0),
-                color1: asUniform(new Color(params.color1 ?? 0x7c9feb)),
-                color2: asUniform(new Color(params.color2 ?? 0xd9e5fc)),
+                color1: asUniform(new Color(params?.color1 ?? 0x7c9feb)),
+                color2: asUniform(new Color(params?.color2 ?? 0xd9e5fc)),
 
-                angle: asUniform(params.angle ?? 0),
-                seed: asUniform(params.seed ?? Date.now()),
+                angle: asUniform(params?.angle ?? 0),
+                seed: asUniform(params?.seed ?? Date.now()),
 
             },
             vertexShader: vert,

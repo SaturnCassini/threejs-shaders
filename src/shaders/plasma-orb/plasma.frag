@@ -1,28 +1,19 @@
 #define PI 3.1415926535897932384626433832795
-precision mediump float;
+precision highp float;
 
 // perlin seed
 uniform int seed;
 uniform vec3 color1;
 uniform vec3 color2;
 
-uniform sampler2D uSampler;
-
 uniform float time;
-
-// offset for perlin samples.
-in vec2 offset;
-in vec2 vTextureCoord;
 
 in vec2 pt1;
 in vec2 pt2;
 
-/// world vertex position.
-//in vec2 vertPos;
-
 // vertPos divided by radius in each dimension.
 // not normalized.
-in vec2 vertR;
+in vec3 vertR;
 
 out vec4 color;
 
@@ -81,48 +72,35 @@ float cutoff(float min,float v){
 	return v*step(min,v);
 }
 
-void main(void)
-{
-	vec4 tex=texture(uSampler,vTextureCoord);
+void main(void){
 	
 	float r=length(vertR);
 	
-	if(r>1.05){
-		color=tex;
-	}else{
-		
-		float z=sqrt(1.-length(vertR*vertR));
-		
-		/// smooth edge at drop>1
-		float alpha1=r>1.?1.-smoothstep(1.,1.06,r):pow(r,4.);
-		alpha1*=.77;
-		
-		/// Edge circle with wavy interior:
-		//alpha1*=.65+.5*perlin(vertR+.6*offset,4);
-		//alpha1=cutoff(.3,alpha1);
-		
-		/// displacement = 1-z
-		float del=perlin(vertR*(1.+.4*(1.-z))+time*.01,3);
-		
-		// distance to lightning
-		float d1=abs(4.*del)*min(length(cross(vec3(vertR-pt1,0.),vec3(1.,1.,1.))),.95);
-		//d1=max(d1,.03);
-		
-		float d2=abs(4.*del)*min(length(cross(vec3(vertR-pt2,0.),vec3(1.,1.,1.))),.95);
-		//d2=max(d2,.03);
-		
-		d1=min(d1,d2);
-		/// acid trip stuff:
-		//float alpha2=mix(1.,0.,d/.2);
-		
-		float alpha2=mix(.0,1.,1.-min(d1/.22,1.));
-		//alpha2*=cutoff(.4,.5+.5*perlin(vertR,4));
-		
-		vec4 bubble=alpha1*vec4(color1,1.);
-		vec4 shock=alpha2*vec4(color1,1.);
-		
-		color=bubble.a>0.?bubble.a*bubble+(1.-bubble.a)*tex+shock:tex;
-		
-	}
+	/// smooth edge at drop>1
+	float alpha1=r>1.?1.-smoothstep(1.,1.06,r):pow(r,4.);
+	alpha1*=.77;
+	
+	/// displacement = 1-z
+	float del=perlin(vertR.xy*(1.+.4*vertR.z)+.45*time,3);
+	
+	// distance to lightning
+	float d1=abs(4.*del)*min(length(cross(vertR,vec3(pt1,0.))),.95);
+	//d1=max(d1,.03);
+	
+	float d2=abs(4.*del)*min(length(cross(vertR,vec3(pt2,0.))),.95);
+	//d2=max(d2,.03);
+	
+	d1=min(d1,d2);
+	/// acid trip stuff:
+	//float alpha2=mix(1.,0.,d/.2);
+	
+	float alpha2=mix(.0,1.,1.-min(d1/.22,1.));
+	//alpha2*=cutoff(.4,.5+.5*perlin(vertR,4));
+	
+	vec4 orb=alpha1*vec4(color1,1.);
+	vec4 shock=alpha2*vec4(color1,1.);
+	vec4 tex=vec4(.5,.5,.5,1.);
+	
+	color=orb.a>0.?orb.a*orb+(1.-orb.a)*tex+shock:tex;
 	
 }

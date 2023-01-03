@@ -47,14 +47,12 @@
   "include": [
     "./*.ts",
     "./global.d.ts",
-    "index.ts",
     "./src/**/*.ts",
     "./src/**/*.d.ts",
     "./src/**/*.tsx",
   ],
   "exclude": [
-    "dist/",
-    "build",
+    "dist",
     "node_modules",
     "lib",
     "types"
