@@ -12,7 +12,7 @@ export default async function (env: ConfigEnv) {
 
     envDir: './',
 
-    base: 'threejs-shaders',
+    base: '/threejs-shaders/',
 
     resolve: {
 
