@@ -8,3 +8,8 @@ clone the repository
 # To build
 `npm run build`
 `npm run preview`
+
+# deploy to gh-pages
+`npm run build`
+`npm run deploy`
+wait a few minutes for the site to update: [link](www.saturnseries.com)
