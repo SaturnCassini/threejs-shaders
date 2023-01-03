@@ -17,9 +17,9 @@ const path = './objects/SSTITLE.gltf';
 
 
 const camera = new PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 50);
-camera.position.z = 3;
+camera.position.z = 5;
 camera.position.y = 3;
-camera.position.x = 0;
+// camera.position.x = 4;
 
 const scene = new Scene();
 
@@ -28,13 +28,24 @@ const saturn = new PlasmaOrb(1);
 scene.add(saturn);
 
 // Create Rings
-const ringGeometry = new THREE.RingGeometry(1.5, 2.3, 50)
-const ringMaterial = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide})
-const ring = new THREE.Mesh(ringGeometry, ringMaterial)
-ring.rotation.x =  1.7
-const ringSystem = new THREE.Object3D()
-ringSystem.add(ring)
-saturn.add(ringSystem)
+const ringGeometry1 = new THREE.RingGeometry(1.83, 2.1, 50)
+const ringMaterial1 = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide})
+const ring1 = new THREE.Mesh(ringGeometry1, ringMaterial1)
+ring1.rotation.x =  1.7
+const ringSystem1 = new THREE.Object3D()
+ringSystem1.add(ring1)
+saturn.add(ringSystem1)
+
+
+// Create Rings
+const ringGeometry2 = new THREE.RingGeometry(1.3, 1.75, 50)
+const ringMaterial2 = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide})
+const ring2 = new THREE.Mesh(ringGeometry2, ringMaterial2)
+ring2.rotation.x =  1.6
+const ringSystem2 = new THREE.Object3D()
+ringSystem2.add(ring2)
+
+saturn.add(ringSystem2)
 camera.lookAt(saturn.position)
 
 // Add orbiting moons
@@ -156,7 +167,8 @@ function update(dt: number) {
     tethysSystem.rotation.y += 0.02
     dioneSystem.rotation.y += 0.01
     rheaSystem.rotation.y += 0.03
-    ringSystem.rotation.y += 0.005
+    ringSystem1.rotation.y -= 0.03
+    ringSystem2.rotation.y += 0.03
     scene.rotation.y += 0.0005
     effect.render(scene, camera);
 }
