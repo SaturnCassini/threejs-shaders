@@ -19,7 +19,7 @@ echo > .nojekyll
 echo 'www.saturnseries.com' > CNAME
 
 git init
-git checkout -B master
+git checkout -B v1
 git add -A
 git commit -m 'deploy'
 
