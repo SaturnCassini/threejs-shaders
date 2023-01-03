@@ -4,7 +4,7 @@
 set -e
 
 # npm install
-npm i
+# npm i
 
 # build
 npm run build
@@ -16,7 +16,7 @@ cd dist
 echo > .nojekyll
 
 # if you are deploying to a custom domain
-# echo 'www.example.com' > CNAME
+echo 'saturnseries.com' > CNAME
 
 git init
 git checkout -B master
@@ -27,6 +27,6 @@ git commit -m 'deploy'
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:SaturnCassini/threejs-shaders.git main:gh-pages
+# git push -f git@github.com:SaturnCassini/threejs-shaders.git main:gh-pages
 
 cd -

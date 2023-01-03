@@ -1,4 +1,5 @@
 {
+  "homepage": "https://saturnseries.com",
   "name": "threejs-shaders",
   "version": "1.0.0",
   "description": "testing shaders for three.js",
@@ -10,7 +11,7 @@
     "build": "vite build",
     "dev": "vite",
     "force": "vite --force",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -b master -d dist"
   },
   "author": "lemur",
   "license": "ISC",
