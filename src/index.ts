@@ -18,7 +18,8 @@ const path = './objects/SSTITLE.gltf';
 
 const camera = new PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 50);
 camera.position.z = 3;
-camera.position.y = 0;
+camera.position.y = 3;
+camera.position.x = 0;
 
 const scene = new Scene();
 
@@ -27,7 +28,7 @@ const saturn = new PlasmaOrb(1);
 scene.add(saturn);
 
 // Create Rings
-const ringGeometry = new THREE.RingGeometry(1.2, 2, 50)
+const ringGeometry = new THREE.RingGeometry(1.5, 2.3, 50)
 const ringMaterial = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide})
 const ring = new THREE.Mesh(ringGeometry, ringMaterial)
 ring.rotation.x =  1.7
@@ -87,19 +88,19 @@ rheaSystem.add(rhea)
 saturn.add(rheaSystem)
 
 const renderer = new WebGLRenderer({ antialias: true});
-renderer.setSize(window.innerWidth, 400);
+renderer.setSize(800, 400);
 
 renderer.setAnimationLoop(update);
 
 //document.body.appendChild(renderer.domElement);
 
-window.addEventListener('resize', onResize, false);
+// window.addEventListener('resize', onResize, false);
 
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
 
 const effect = new AsciiEffect(renderer, ' .-+*%@', { invert: true });
-effect.setSize(window.innerWidth, window.innerHeight);
+effect.setSize(window.innerWidth/2, window.innerHeight/2);
 effect.domElement.style.color = 'lightgreen';
 effect.domElement.style.backgroundColor = 'black';
 document.body.appendChild(effect.domElement);
@@ -162,10 +163,10 @@ function update(dt: number) {
 
 
 function onResize() {
-    camera.aspect = window.innerWidth / 400;
+    camera.aspect = 800/400 ;
     camera.updateProjectionMatrix();
 
-    composer.setSize(window.innerWidth, 400);
+    composer.setSize(800, 400);
 }
 
 
