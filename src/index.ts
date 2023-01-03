@@ -90,7 +90,7 @@ saturn.add(rheaSystem)
 
 const renderer = new WebGLRenderer({ antialias: true });
 
-renderer.setSize(window.innerWidth, window.innerHeight/2);
+renderer.setSize(window.innerWidth, window.innerHeight);
 
 renderer.setAnimationLoop(update);
 
@@ -113,7 +113,7 @@ const controls = new OrbitControls(camera, effect.domElement)
 controls.enableDamping = true
 controls.dampingFactor = 0.05
 controls.maxDistance = 15
-controls.minDistance = 0.1
+controls.minDistance = 3
 
 // // Add a title  to the scene
 // // create canvas element and draw text on it
