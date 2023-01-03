@@ -12,7 +12,6 @@ in vec2 pt1;
 in vec2 pt2;
 
 // vertPos divided by radius in each dimension.
-// not normalized.
 in vec3 vertR;
 
 out vec4 color;
