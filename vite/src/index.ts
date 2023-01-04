@@ -81,7 +81,7 @@ const dioneSystem = new THREE.Object3D()
 dioneSystem.add(dione)
 saturn.add(dioneSystem)
 // Rhea
-const rheaGeometry = new THREE.SphereGeometry(0.4, 32, 32)
+const rheaGeometry = new THREE.SphereGeometry(0.8, 32, 32)
 const rheaMaterial = new THREE.MeshNormalMaterial()
 const rhea = new THREE.Mesh(rheaGeometry, rheaMaterial)
 rhea.position.set(43, 0, 0)
@@ -118,6 +118,49 @@ controls.dampingFactor = 0.05
 controls.maxDistance = 15
 controls.minDistance = 3
 
+document.addEventListener('keydown', onDocumentKeyDown, false);
+document.addEventListener('keyup', onDocumentKeyUp, false);
+
+var moveForward = false;
+var moveBackward = false;
+var moveLeft = false;
+var moveRight = false;
+
+function onDocumentKeyDown(event) {
+  switch (event.keyCode) {
+    case 87: // w
+        moveForward = true;
+      break;
+    case 65: // a
+        moveLeft = true;
+      break;
+    case 83: // s
+        moveBackward = true;
+      break;
+    case 68: // d
+        moveRight = true;
+      break;
+  }
+}
+
+function onDocumentKeyUp(event) {
+  switch (event.keyCode) {
+    case 87: // w
+      moveForward = false;
+      break;
+    case 65: // a
+      moveLeft = false;
+      break;
+    case 83: // s
+      moveBackward = false;
+      break;
+    case 68: // d
+      moveRight = false;
+      break;
+  }
+}
+
+
 function onResize() {
     camera.aspect = window.innerWidth / window.innerHeight*1.5;
     composer.setSize(window.innerWidth, window.innerHeight/1.5);
@@ -125,6 +168,14 @@ function onResize() {
 }
 
 function update(dt: number) {
+
+
+    if (moveForward) camera.position.z -= 0.1;
+    if (moveBackward) camera.position.z += 0.1;
+    if (moveLeft) camera.position.x -= 0.1;
+    if (moveRight) camera.position.x += 0.1;
+    
+    
 
     saturn.update(dt);
     composer.render(dt);
