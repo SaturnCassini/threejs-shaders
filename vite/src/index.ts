@@ -22,6 +22,17 @@ const scene = new Scene();
 const saturn = new PlasmaOrb(1) as Mesh;
 scene.add(saturn);
 
+// Add a userData property to the Saturn mesh object
+Object.defineProperty(saturn, 'userData', {
+    value: {},
+    writable: true,
+    enumerable: true,
+    configurable: true
+});
+  
+// Set the value of the url property to the desired URL string
+saturn.userData.URL = 'https://en.wikipedia.org/wiki/Saturn';
+
 // Create Rings
 const ringGeometry1 = new THREE.RingGeometry(1.83, 2.1, 50)
 const ringMaterial1 = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide})
@@ -159,6 +170,41 @@ function onDocumentKeyUp(event) {
       break;
   }
 }
+
+// Raycaster
+const raycaster = new THREE.Raycaster();
+document.addEventListener('click', onDocumentMouseDown, false);
+document.addEventListener('mousemove', onDocumentMouseMove, false)
+
+function onDocumentMouseMove(event){
+    const mouse ={
+        x: (event.clientX / effect.domElement.clientWidth) * 2 - 1,
+        y: -(event.clientY / effect.domElement.clientHeight) * 2 + 1
+    }  
+    // console.log('mousemove:', mouse)
+    console.log(mouse)
+}
+
+function onDocumentMouseDown(event) {
+  // Set the mouse position to be used for the raycaster
+  const mouse ={
+    x: (event.clientX / effect.domElement.clientWidth) * 2 - 1,
+    y: -(event.clientY / effect.domElement.clientHeight) * 2 + 1
+}  
+  // Update the raycaster with the new mouse position
+  raycaster.setFromCamera(mouse, camera);
+  console.log('mouseclick:', mouse)
+
+
+  // Use the raycaster to detect if the user clicked on an object
+  const intersects = raycaster.intersectObjects(saturn);
+  if (intersects.length > 0) {
+    // If the user clicked on an object, open the link associated with that object
+    console.log(saturn.userData.URL);
+    effect.open(intersects[0].object.userData.URL, '_blank');
+  }
+}
+
 
 
 function onResize() {
