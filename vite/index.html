@@ -2,6 +2,15 @@
 <html lang="en">
 
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WSMP5DB9FP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-WSMP5DB9FP');
+  </script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'; connect-src 'self'" />
@@ -59,15 +68,87 @@
 
 
   <a href="https://www.scatter.art/collection/0xD45b8768C9d5Cb57a130fa63fEab85Ba9f52Cc22?tab=mint" target="_blank">
-    <button class="retro" >
+    <button class="retro" onclick="gtag('event', 'mint_now', {
+      'send_to': 'G-WSMP5DB9FP/conversion',
+      'event_category': 'mint_now',
+      'event_action': 'click'})" >
       Mint Now!
     </button>
   </a>
+  <br>
+
+  <div class="ticker-container">
+    <div class="ticker-text">
+      <span> (SUMMARY) :
+        Saturn series is a collection of 888 unique anime-inspired Profile
+        Pictures (PFPs), all generated with Artificial Intelligence, living on
+        Ethereum Mainnet and the Interplanetary File System (IPFS). We aim to
+        build on top of community lore, science, and anime to tell a utopian
+        story of the future. This first collection of the series begins with
+        soft world building for the Saturn Series and raises funds for further
+        development. During reveal, every character is given a date of birth
+        and a set of ecliptic coordinates that locate them somewhere in the
+        galaxy, and therefore sets its rarity and personality based on real
+        life celestial data. </span>
+        <span>
+        - (STORY):
+        The Saturn Program began in 2023, in a utopian future led by
+        general purpose artificial intelligence, unlimited energy
+        production, and a peaceful solar system. As a world effort, new
+        "legends" were bred in artificial wombs with a purpose: they
+        were to be sent out to space to colonize celestial bodies.
+        Each legend had the unique delight, or the dreadful curse, of
+        never aging. Genetic engineers had devised a solution to allow
+        humans to stay young for longer periods of time, yet they kept
+        the same qualities of all human beings. Meanwhile robots and
+        drone-ships fly around the galaxy, looking for more resources
+        for a growing population.</span>
+        <span> . . . </span> 
+        <span>TRANSMISSION CONTINUED IN THE WHITE PAPER- - </span>
+        <span>END OF TRANSMISSION - - - - - - - - - - - - - - </span>
+        <span>Saturn Series - </span>
+        <span>TRANSMISSION CONTINUED IN THE WHITE PAPER- - </span>
+        <span>END OF TRANSMISSION - - - - - - - - - - - - - - </span>
+        <span>Saturn Series - </span>
+          
+    </div>
+  </div>
   
+  <!-- <button id="sound-button" onclick="toggleSound()">🔊</button>
+
+  <script>
+    // Initialize audio element and set the source
+    const audio = new Audio('/sounds/song.mp3');
+
+    // Initialize the sound button and set the initial emoji
+    const soundButton = document.getElementById('sound-button');
+    let isMuted = false;
+
+    function toggleSound() {
+      // If the audio is playing, pause it and update the emoji to the mute emoji
+      if (!audio.paused) {
+        audio.pause();
+        soundButton.innerHTML = '🔇';
+        soundButton.style.background = "lightblue";
+        soundButton.style.boxShadow = "3px 3px black, 5px 5px lightblue";
+
+        isMuted = true;
+      } else {
+        // If the audio is paused, play it and update the emoji to the sound emoji
+        audio.play();
+        soundButton.innerHTML = '🔊';
+        soundButton.style.background = "lightgreen";
+        soundButton.style.boxShadow = "3px 3px black, 5px 5px lightgreen";
+        isMuted = false;
+      }
+    }
+  </script> -->
+
 
   <div>
     <script type="module" src="/src/index.ts"></script>
   </div>
+
   <!-- <div id="c1">
 Test script
   </div> -->

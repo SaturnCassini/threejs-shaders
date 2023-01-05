@@ -1,6 +1,7 @@
 body {
     background-color: black;
     width:auto;
+    transform: translate(, 100%);
 
 }
 canvas {
@@ -19,6 +20,8 @@ canvas {
     font-size: 8px;
     text-align: center;
     height:auto;
+    transform: translate(0%, 40px);
+
 }
 
 .footer {
@@ -26,7 +29,9 @@ canvas {
     color: lightgreen;
     font-family: 'Courier New', Courier, monospace;
     font-size: xx-small;
-    text-align: center;
+    text-align: center;   
+    transform: translate(0%, 40px);
+
 }
 
 a:visited {
@@ -40,10 +45,41 @@ a:link {
     padding: 0;
 }
 
+/* Style for the ticker container */
+  .ticker-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    overflow: hidden;
+  }
 
+  /* Style for the ticker text */
+  .ticker-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 100;
+    font-size: xx-small;
+    color: lightgreen;
+    white-space: nowrap;
+    animation: ticker 120s linear infinite;
+    
+  }
+
+  /* Animation for the ticker text */
+  @keyframes ticker {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-13700px);
+    }
+  }
 .retro{
-    transform: translate(-50%, 0);
     position: relative;
+    /* align-self: center; */
+
+    transform: translate(50%, 40px);
     left: 50%  ;
     /* display: inline-block; */
     vertical-align: middle;
@@ -63,9 +99,40 @@ a:link {
     border: 3px solid black!important;
     border-radius: 0;
     box-shadow: 3px 3px black, 5px 5px lightgreen;
+    transform: translate(-50%, 40px);
     /* padding-right: 5%; */
     /* margin-top: 20px; */
 }
+
+#sound-button{
+    transform: translate(-50%, 0);
+    position: relative;
+    /* left: 50%  ; */
+    /* display: inline-block; */
+    vertical-align: middle;
+    user-select: none;
+    position: absolute;
+    right:    0;
+    bottom:   0;    
+    /* padding-top: 1px;
+    /* padding-bottom: 10px; */
+   
+    font-size: 12rem;
+    line-height: 1.5;
+    background: lightgreen;
+    color: black;
+    font-size: 20px;
+    font-family: monospace;
+    font-weight: 800;
+    /* text-align: center; */
+    border: 3px solid black!important;
+    border-radius: 0;
+    box-shadow: 3px 3px black, 5px 5px lightgreen;
+    /* padding-right: 5%; */
+    /* margin-top: 20px; */
+}
+
+
 
 .retro:hover{
     color: lightgreen;

@@ -8,7 +8,7 @@ export class PlasmaOrb extends Mesh<BufferGeometry, PlasmaOrbMaterial> {
     constructor(radius: number) {
         super(new SphereGeometry(radius,), new PlasmaOrbMaterial());
 
-        console.dir(this.material.uniforms);
+        // console.dir(this.material.uniforms);
     }
 
 

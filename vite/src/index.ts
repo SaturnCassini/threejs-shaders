@@ -10,11 +10,12 @@ import { PlasmaOrb } from './objects/plasma-orb';
 import { AsciiEffect } from 'three/examples/jsm/effects/AsciiEffect';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
+import { AudioLoader } from 'three';
 
-const camera = new PerspectiveCamera(120, window.innerWidth / window.innerHeight, 0.01, 150);
-camera.position.z = 4;
-camera.position.y = 5;
-camera.position.x = -1;
+const camera = new PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.01, 3000);
+camera.position.z = 2;
+camera.position.y = 3;
+camera.position.x = -3;
 
 const scene = new Scene();
 
@@ -52,10 +53,10 @@ saturn.add(ringSystem2)
 
 // Add orbiting moons
 // Titan
-const titanGeometry = new THREE.SphereGeometry(0.1, 32, 32)
+const titanGeometry = new THREE.SphereGeometry(0.2, 32, 32)
 const titanMaterial = new THREE.MeshNormalMaterial()
 const titan = new THREE.Mesh(titanGeometry, titanMaterial)
-titan.position.set(7, 0, 0)
+titan.position.set(10, 3, 0)
 const titanSystem = new THREE.Object3D()
 titanSystem.add(titan)
 saturn.add(titanSystem)
@@ -63,36 +64,39 @@ saturn.add(titanSystem)
 const encelaedusGeometry = new THREE.SphereGeometry(0.4, 32, 32)
 const encelaedusMaterial = new THREE.MeshNormalMaterial()
 const encelaedus = new THREE.Mesh(encelaedusGeometry, encelaedusMaterial)
-encelaedus.position.set(10, 0, 0)
+encelaedus.position.set(15, -2, 0)
 const encelaedusSystem = new THREE.Object3D()
 encelaedusSystem.add(encelaedus)
 saturn.add(encelaedusSystem)
 // Mimas
-const mimasGeometry = new THREE.SphereGeometry(0.5, 32, 32)
+const mimasGeometry = new THREE.SphereGeometry(1, 32, 32)
 const mimasMaterial = new THREE.MeshNormalMaterial()
 const mimas = new THREE.Mesh(mimasGeometry, mimasMaterial)
-mimas.position.set(12, 0, 0)
+mimas.position.set(21, 0, 12)
 const mimasSystem = new THREE.Object3D()
 mimasSystem.add(mimas)
+mimasSystem.rotation.y += 0.4
 saturn.add(mimasSystem)
 // Tethys
-const tethysGeometry = new THREE.SphereGeometry(0.3, 32, 32)
+const tethysGeometry = new THREE.SphereGeometry(0.6, 32, 32)
 const tethysMaterial = new THREE.MeshNormalMaterial()
 const tethys = new THREE.Mesh(tethysGeometry, tethysMaterial)
-tethys.position.set(20, 0, 0)
+tethys.position.set(25, 0, 0)
 const tethysSystem = new THREE.Object3D()
 tethysSystem.add(tethys)
+tethysSystem.rotation.y += 0.21
 saturn.add(tethysSystem)
 // Dione
-const dioneGeometry = new THREE.SphereGeometry(0.6, 32, 32)
+const dioneGeometry = new THREE.SphereGeometry(1.2, 32, 32)
 const dioneMaterial = new THREE.MeshNormalMaterial()
 const dione = new THREE.Mesh(dioneGeometry, dioneMaterial)
-dione.position.set(25, 0, 0)
+dione.position.set(33, 0, 0)
 const dioneSystem = new THREE.Object3D()
 dioneSystem.add(dione)
+dioneSystem.rotation.y += 1
 saturn.add(dioneSystem)
 // Rhea
-const rheaGeometry = new THREE.SphereGeometry(0.8, 32, 32)
+const rheaGeometry = new THREE.SphereGeometry(1.2, 32, 32)
 const rheaMaterial = new THREE.MeshNormalMaterial()
 const rhea = new THREE.Mesh(rheaGeometry, rheaMaterial)
 rhea.position.set(43, 0, 0)
@@ -114,19 +118,21 @@ window.addEventListener('resize', onResize, false);
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
 
-const effect = new AsciiEffect(renderer, ' .-+*%@', { invert: true });
+const effect = new AsciiEffect(renderer, ' .-+*saturnsATURNS', { invert: true });
 effect.setSize(window.innerWidth, window.innerHeight/1.5);
 composer.aspect = window.innerWidth / window.innerHeight*1.5;
 effect.domElement.style.color = 'lightgreen';
 effect.domElement.style.backgroundColor = 'black';
 document.body.appendChild(effect.domElement);
 
+
+
 // Add Orbit Controls
 // Controls
 const controls = new OrbitControls(camera, effect.domElement)
 controls.enableDamping = true
 controls.dampingFactor = 0.05
-controls.maxDistance = 15
+controls.maxDistance = 30
 controls.minDistance = 3
 
 document.addEventListener('keydown', onDocumentKeyDown, false);
@@ -137,7 +143,36 @@ var moveBackward = false;
 var moveLeft = false;
 var moveRight = false;
 
+
+
+
+// // add background sound with audio listener
+// const listener = new THREE.AudioListener();
+// camera.add(listener);
+// const audioLoader = new AudioLoader();
+// const backgroundSong = new THREE.Audio( listener );
+
+
+// const muteButton = document.getElementById('audio-mute') as HTMLButtonElement
+// function muteToggle(event){
+//   // when the button is clicked toggle the mute property of the sound
+//   audioLoader.load('sounds/song.mp3', function(buffer) {
+//     backgroundSong.setBuffer(buffer);
+//     backgroundSong.setLoop(true);
+//     backgroundSong.setVolume(0.5);
+//     } 
+//   );
+//   backgroundSong.muted = !backgroundSong.muted;
+//   // change the button text
+//   muteButton.innerHTML = backgroundSong.muted ? 'Unmute' : 'Mute';
+//   console.log('mute')
+// }
+
+
+
 function onDocumentKeyDown(event) {
+  // backgroundSong.play();
+
   switch (event.keyCode) {
     case 87: // w
         moveForward = true;
@@ -181,8 +216,7 @@ function onDocumentMouseMove(event){
         x: (event.clientX / effect.domElement.clientWidth) * 2 - 1,
         y: -(event.clientY / effect.domElement.clientHeight) * 2 + 1
     }  
-    // console.log('mousemove:', mouse)
-    console.log(mouse)
+
 }
 
 function onDocumentMouseDown(event) {
@@ -195,6 +229,7 @@ function onDocumentMouseDown(event) {
   raycaster.setFromCamera(mouse, camera);
   console.log('mouseclick:', mouse)
 
+  // backgroundSong.play();
 
   // Use the raycaster to detect if the user clicked on an object
   const intersects = raycaster.intersectObjects(saturn);
@@ -225,12 +260,12 @@ function update(dt: number) {
 
     saturn.update(dt);
     composer.render(dt);
-    titanSystem.rotation.y += 0.005
-    encelaedusSystem.rotation.y += 0.003
-    mimasSystem.rotation.y += 0.005
-    tethysSystem.rotation.y += 0.004
-    dioneSystem.rotation.y += 0.0035
-    rheaSystem.rotation.y += 0.0021
+    titanSystem.rotation.y += 0.0071
+    encelaedusSystem.rotation.y += 0.005
+    mimasSystem.rotation.y += 0.0025
+    tethysSystem.rotation.y += 0.002
+    dioneSystem.rotation.y += 0.0015
+    rheaSystem.rotation.y += 0.001
     ringSystem1.rotation.y -= 0.02
     ringSystem2.rotation.y += 0.05
     scene.rotation.y += 0.00005
